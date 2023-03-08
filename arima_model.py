@@ -22,29 +22,16 @@ df = df.dropna()
 
 df = df.reset_index()
 
-X = df.copy()
-
-X = X[['T (degC) t-1', 'Tpot (K) t-1', 'VPmax (mbar) t-1', 'rho (g/m**3) t-1']]
-
 y = df[['T (degC)']]
-# print(y.head())
 
-X = sm.add_constant(X)
-
-pd.get_dummies(X)
-
-len_data = len(X)
+len_data = len(df)
 test_days = 50
 len_train = len_data - test_days
 
-X_train = X.iloc[:, :len_data - test_days]
-X_test = X.iloc[len_data - test_days:, :]
-
-y_train = y.iloc[:, :len_data - test_days]
 y_test = y.iloc[len_data - test_days:, :]
-
-model_stats = []
-df_stats = []
+#
+# model_stats = []
+# df_stats = []
 
 # optimal: ar 2, ma 2
 # for ar in range(0, 5):

@@ -18,6 +18,7 @@ import numpy as np
 from sklearn import metrics
 from xgboost import XGBRegressor
 import statsmodels.tsa.arima.model as sma
+import matplotlib.pyplot as plt
 
 pd.set_option('display.max_columns', None)
 pd.set_option('display.width', 1000)
@@ -145,3 +146,9 @@ stacked_predictions = stacked_model.predict(pred_test_df)
 print(stacked_model.summary())
 
 print('\n\nRoot Mean Squared Error:', np.sqrt(metrics.mean_squared_error(y_test, stacked_predictions)))
+
+plt.scatter(stacked_predictions, y_test)
+plt.title("Stacked Model Predictions vs Actual")
+plt.xlabel("Stacked Model Predictions")
+plt.ylabel("Actual Values")
+plt.show()

@@ -31,13 +31,9 @@ pd.set_option('display.width', 1000)
 
 df = pd.read_csv("./mini_temp.csv", parse_dates=['Date Time'])
 
-print(df.head(50))
-print(df.describe())
-temp_df = pd.DataFrame()
-temp_df['T (degC)'] = df.set_index('Date Time').resample('M')['T (degC)'].mean()
-print(temp_df.head())
+print(df.head(145))
+print(df.describe().T)
 
-temp_df = temp_df.reset_index()
 
 plt.figure(figsize=(15, 10))
 
@@ -95,8 +91,40 @@ plt.title("wd (deg)")
 
 plt.figure(figsize=(25, 6))
 
+temp_df = pd.DataFrame()
+temp_df['T (degC)'] = df.set_index('Date Time').resample('M')['T (degC)'].mean()
+# print(temp_df.head(100))
+
+temp_df = temp_df.reset_index()
+
 plt.subplot(1, 1, 1)
 plt.scatter(y=temp_df['T (degC)'], x=temp_df['Date Time'])
 plt.title("Temp vs Time")
+
+# day_df = df.head(142)
+#
+# plt.subplot(2, 1, 2)
+# plt.scatter(y=day_df['T (degC)'], x=day_df['Date Time'])
+# plt.title("Temp vs Time")
+
+plt.figure(figsize=(14, 4))
+
+plt.subplot(1, 3, 1)
+plt.scatter(df['Tpot (K)'], df['T (degC)'])
+plt.title("Tpot (K) vs T (degC)")
+plt.xlabel("Tpot (K)")
+plt.ylabel("T (degC)")
+
+plt.subplot(1, 3, 2)
+plt.scatter(df['VPmax (mbar)'], df['T (degC)'])
+plt.title("VPmax (mbar) vs T (degC)")
+plt.xlabel("VPmax (mbar)")
+plt.ylabel("T (degC)")
+
+plt.subplot(1, 3, 3)
+plt.scatter(df['rho (g/m**3)'], df['T (degC)'])
+plt.title("rho (g/m**3) vs T (degC)")
+plt.xlabel("rho (g/m**3)")
+plt.ylabel("T (degC)")
 
 plt.show()

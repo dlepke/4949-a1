@@ -1,5 +1,5 @@
 """
-OLS regression model with at least two features alongside a back-shifted target variable.
+XGBoost model.
 """
 
 import pandas as pd
